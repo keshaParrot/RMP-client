@@ -97,6 +97,11 @@ void loop() {
     screenIndex = 3;
   }
   dataManager->checkConnection();
+
+  clgm->updateData(cpu);
+  gdgm->updateData(gpu);
+  rdgm->updateData(ram);
+
   if(dataManager->updateData(&cpu, &gpu, &ram)){
     showScreen();
   }

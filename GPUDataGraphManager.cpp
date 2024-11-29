@@ -1,6 +1,6 @@
 #include "GPUDataGraphManager.h"
 
-void GPUDataGraphManager::updateGPUData(const GPUData &gpuData) {
+void GPUDataGraphManager::updateData(GPUData gpuData) {
     updateVoltageRange(gpuData.voltage);
     gpuBuffers.loadBuffer.add(gpuData.load);
 
@@ -46,9 +46,7 @@ void GPUDataGraphManager::drawSingleGraph(int x, int y, int width, int height, c
     tft.drawRect(x, y, width, height, TFT_WHITE);
 }
 
-void GPUDataGraphManager::drawAllGraphs(GPUData &gpuData, int x, int y, int width, int height) {
-    updateGPUData(gpuData);
-
+void GPUDataGraphManager::drawAllGraphs(int x, int y, int width, int height) {
     int fieldHeight = height / 6;
 
     drawSingleGraph(x, y, width, fieldHeight, gpuBuffers.loadBuffer, colors[0]);
@@ -57,7 +55,7 @@ void GPUDataGraphManager::drawAllGraphs(GPUData &gpuData, int x, int y, int widt
     drawSingleGraph(x, y + 3 * fieldHeight, width, fieldHeight, gpuBuffers.temperatureBuffer, colors[3]);
     drawSingleGraph(x, y + 4 * fieldHeight, width, fieldHeight, gpuBuffers.voltageBuffer, colors[4]);
 
-    if (gpuData.fanSpeed != -1) {
+    if (gpuBuffers.fanSpeedBuffer.get(0) != -1) {
         drawSingleGraph(x, y + 5 * fieldHeight, width, fieldHeight, gpuBuffers.fanSpeedBuffer, colors[5]);
     }
 }

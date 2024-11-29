@@ -27,13 +27,13 @@ class GPUDataGraphManager {
 
     GPUDataBuffers gpuBuffers;
 
-    void updateGPUData(const GPUData &gpuData);
     void updateVoltageRange(float voltage);
     void updateFrequencyRange(float frequency);
     void drawSingleGraph(int x, int y, int width, int height, const RingBuffer<float, 10> &buffer, uint16_t color);
 
   public:
-    void drawAllGraphs(GPUData &gpuData, int x, int y, int width, int height);
+    void updateData(GPUData gpuData);
+    void drawAllGraphs(int x, int y, int width, int height);
 };
 
 #endif  // GPUDATAGRAPHMANAGER_H

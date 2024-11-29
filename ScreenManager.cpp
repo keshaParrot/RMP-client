@@ -25,7 +25,7 @@ void ScreenManager::showCPUScreen() {
         int x = startX + col * (squareSize + horizontalSpacing);
         int y = startY + row * (squareSize + verticalSpacing);
         tft.fillRect(x, y, squareSize, squareSize, TFT_BLACK);
-        clgm->drawCoreLoadGraph(x, y, squareSize, squareSize, cpu.coreUnits[unitIndex],unitIndex);
+        clgm->drawCoreLoadGraph(x, y, squareSize, squareSize,unitIndex);
         int coreX = x + squareSize + 5;
         int coreY = y;
 
@@ -72,7 +72,7 @@ void ScreenManager::showGPUScreen() {
   int rectY = tft.height() - rectHeight - 15;
 
   tft.fillRect(rectX, rectY, rectWidth, rectHeight, TFT_BLACK);
-  gdgm->drawAllGraphs(gpu, rectX, rectY, rectWidth, rectHeight);
+  gdgm->drawAllGraphs(rectX, rectY, rectWidth, rectHeight);
   for(int i = 0; i < 6;i++){
     tft.fillRect(390, 170+(i*20), 12, 12, colors[i]);
   }
@@ -110,13 +110,13 @@ void ScreenManager::showRAMScreen() {
   int startY = tft.height() - rectHeight - 15;
   
   tft.drawString(rdgm->getConfigVal(0) + ":", startX, startY - 25, 2);  
-  rdgm->drawCoreLoadGraph(startX, startY, rectWidth, rectHeight, ram, 0);
+  rdgm->drawCoreLoadGraph(startX, startY, rectWidth, rectHeight, 0);
   
   tft.drawString(rdgm->getConfigVal(1) + ":", startX + rectWidth + horizontalSpacing, startY - 25, 2);  
-  rdgm->drawCoreLoadGraph(startX + rectWidth + horizontalSpacing, startY, rectWidth, rectHeight, ram, 1);
+  rdgm->drawCoreLoadGraph(startX + rectWidth + horizontalSpacing, startY, rectWidth, rectHeight, 1);
   
   tft.drawString(rdgm->getConfigVal(2) + ":", startX + 2 * (rectWidth + horizontalSpacing), startY - 25, 2);  
-  rdgm->drawCoreLoadGraph(startX + 2 * (rectWidth + horizontalSpacing), startY, rectWidth, rectHeight, ram, 2);
+  rdgm->drawCoreLoadGraph(startX + 2 * (rectWidth + horizontalSpacing), startY, rectWidth, rectHeight, 2);
 }
 
 void ScreenManager::showHomeScreen() {

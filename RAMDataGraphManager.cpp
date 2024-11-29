@@ -4,10 +4,18 @@ RAMDataGraphManager::RAMDataGraphManager() {
     ramBuffer.resize(3, RingBuffer<float, 7>());
 }
 
-void RAMDataGraphManager::addVal(int index, float value) {
-    if (index < ramBuffer.size()) {
-        ramBuffer[index].add(value);
+void RAMDataGraphManager::updateData(RAMData data) { 
+  for(int i = 0; i<3 ; i++){
+    float dataToPlot = 0.0f;
+
+    if (getConfigVal(i) != "Load") {
+      dataToPlot = normalizeValue(getGraphData(i, data), data.total);
+    } else {
+      dataToPlot = getGraphData(i, data);
     }
+    
+    ramBuffer[i].add(dataToPlot);
+  }
 }
 
 float RAMDataGraphManager::getRAMElementValue(int element, const RAMData &ramData) {
@@ -58,18 +66,8 @@ float RAMDataGraphManager::getGraphData(int index, const RAMData &ramData) {
     }
 }
 
-void RAMDataGraphManager::drawCoreLoadGraph(int x, int y, int width, int height, RAMData &ramData, int graphIndex) {
+void RAMDataGraphManager::drawCoreLoadGraph(int x, int y, int width, int height, int graphIndex) {
     if (graphIndex >= ramBuffer.size()) return;
-
-    float dataToPlot = 0.0f;
-
-    if (getConfigVal(graphIndex) != "Load") {
-        dataToPlot = normalizeValue(getGraphData(graphIndex, ramData), ramData.total);
-    } else {
-        dataToPlot = getGraphData(graphIndex, ramData);
-    }
-
-    addVal(graphIndex, dataToPlot);
 
     if (ramBuffer[graphIndex].size() < 2) return;
 
