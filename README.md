@@ -33,6 +33,49 @@ parses it using the **ArduinoJson** library, and displays the information on a *
 
 - **HomeScreen**: Provides a summary of system resource usage, allowing users to navigate between different screens.
 
+**switching between screens is implemented using 4 button pins connected to microcontrollers (you can specify the ports to which the buttons are connected in config.h)**
+
+## Installation Instructions
+
+### 1. Download the Repository
+
+- Click the **"Code"** button on the GitHub page and select **Download ZIP**,
+
+**or**
+
+- Use Git to clone the repository: git clone https://github.com/yourusername/repository-name.git
+
+### 2. Open the Project in Arduino IDE
+
+- Open the Arduino IDE.
+- Go to **File > Open** and navigate to the folder where you downloaded/cloned the repository.
+- Open the `.ino` file located in the project folder.
+
+### 3. Install the Required Libraries
+
+#### TFT_eSPI Library
+
+- Download and install the **TFT_eSPI** library:
+1. Go to **Sketch > Include Library > Manage Libraries**.
+2. In the Library Manager, search for **TFT_eSPI** and click **Install**.
+
+- **Important**: After installing the TFT_eSPI library, you must configure it for your specific display controller. Follow the configuration instructions on the [TFT_eSPI GitHub repository](https://github.com/Bodmer/TFT_eSPI) to set up the `User_Setup.h` file to match your screen's pinout and configuration.
+
+#### ArduinoJson Library
+
+- Download and install the **ArduinoJson** library:
+1. Go to **Sketch > Include Library > Manage Libraries**.
+2. In the Library Manager, search for **ArduinoJson** and click **Install**.
+
+### 4. Upload the Sketch to Your Microcontroller
+
+- Connect your microcontroller (e.g., Arduino Uno, ESP32, pi pico.) to your computer via USB.
+- In the Arduino IDE, go to **Tools > Board** and select the correct board.
+- Select the correct **Port** under **Tools > Port**.
+- Click **Upload** to compile the sketch and upload it to your microcontroller.
+
+Once uploaded, the system will start retrieving data from the [RMP-Server](https://github.com/keshaParrot/RMP-server) if server is running and wait data if not, then displaying it on the TFT LCD screen.
+
 ## Customization
 
 Users can easily adjust which data elements are displayed on the graphs by modifying the configuration file (`config.h`).
